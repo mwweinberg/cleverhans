@@ -29,6 +29,10 @@ class Sprite {
              console.log('victory');
              //make the horse disappear
              this.x = width + 30;
+
+             //adds a square just to show you can draw things
+             fill(255, 204, 0);
+             rect(0, 0, 50, 50);
         }
         console.log(this.index);
     }
