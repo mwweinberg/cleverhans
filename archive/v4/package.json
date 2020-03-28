@@ -1,0 +1,20 @@
+{
+  "name": "cleverhans",
+  "version": "0.5.0",
+  "description": "clever hans as a website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clever",
+    "hans",
+    "horse",
+    "german"
+  ],
+  "author": "Michael Weinberg",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
