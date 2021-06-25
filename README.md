@@ -1,0 +1,1 @@
+The slowly evolving archive for the clever hans site.  /archive has all of the old attempts.  game1.js is just a place to quickly save working versions and I go and can be ignored in the final build.  
