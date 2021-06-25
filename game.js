@@ -224,7 +224,7 @@ class inputPage extends Phaser.Scene {
     }
 
     addAddButton(){
-        var addButton = this.add.image(400, 150, "add_hans");
+        var addButton = this.add.image(275, 150, "add_hans");
         addButton.setInteractive();
         addButton.on("pointerdown", function(){
             calcOut = calc1 + calc2;
@@ -233,7 +233,7 @@ class inputPage extends Phaser.Scene {
     }
 
     addMinusButton(){
-        var subButton = this.add.image(400, 350, "sub_hans");
+        var subButton = this.add.image(275, 350, "sub_hans");
         subButton.setInteractive();
         subButton.on("pointerdown", function(){
             calcOut = calc1 - calc2;
@@ -248,6 +248,13 @@ class mathPage extends Phaser.Scene {
     }
 
     create(){
+
+        //hans cannot express negative numbers
+        //may need to be 1 so that the math below does not create -1
+        if (calcOut < 0) {
+            calcOut = 1
+        }
+
         var calcOutValue = this.add.text(200, 200, calcOut);
         calcOutValue.setStyle({
             color: 'black'
@@ -265,8 +272,9 @@ class mathPage extends Phaser.Scene {
         const cody = this.add.sprite(400, 300);
         //scales the animation object
         cody.setScale(2);
-        //plasy the animation object calcOut number of times
-        cody.play({key: 'walk', repeat: calcOut});
+        //plays the animation object calcOut number of times
+        //does repeat always do one extra? That's what the -1 is there to balance
+        cody.play({key: 'walk', repeat: (calcOut - 1)});
 
         //adds the reset button
         this.addResetButton();
