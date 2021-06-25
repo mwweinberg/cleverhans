@@ -234,6 +234,7 @@ class mathPage extends Phaser.Scene {
             color: 'black'
         });
 
+        //creates the animation object
         this.anims.create({
             key: 'walk',
             frames: this.anims.generateFrameNumbers('brawler', { frames: [ 0, 1, 2, 3 ] }),
@@ -241,10 +242,24 @@ class mathPage extends Phaser.Scene {
             //repeat: calcOut
         });
 
+        //inserts the animation object
         const cody = this.add.sprite(400, 300);
+        //scales the animation object
         cody.setScale(2);
+        //plasy the animation object calcOut number of times
         cody.play({key: 'walk', repeat: calcOut});
 
+        //adds the reset button
+        this.addResetButton();
+
+    }
+
+    addResetButton(){
+        var resetButton = this.add.image(100, 400, "restart");
+        resetButton.setInteractive();
+        resetButton.on("pointerdown", function(){
+            this.scene.start("InputPage");
+        }, this);
     }
 }
 
