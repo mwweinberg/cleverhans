@@ -4,6 +4,7 @@
         <title>Clever Hans</title>
         <!-- The CSS is in this file because the tutorial is designed to minimize the number of files -->
         <meta name = "viewport" content = "width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0, minimal-ui" />
+        <!-- <link rel="preload" as="font" href="assets/fonts/GermaniaOne-Regular.ttf" type="font/ttf" /> -->
         <style type = "text/css">
             body{
                 padding: 0px;
@@ -17,11 +18,14 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
+            @font-face {
+                font-family: GermaniaOne-Regular;
+                src: url('assets/fonts/GermaniaOne-Regular.ttf');
+            }
         </style>
 
         <script type="text/javascript" src="phaser.min.js"></script>
         <script type="text/javascript" src="game.js"></script>
-        <link rel='stylesheet' type='text/css' href='style.css'>
     </head>
     <body>
     </body>

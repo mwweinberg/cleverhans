@@ -53,7 +53,10 @@ class bootGame extends Phaser.Scene{
         this.load.image("osten_face_right", "assets/images/Osten_face_right.jpg");
         this.load.image("plus_image", "assets/images/plus.png");
         this.load.image("minus_image", "assets/images/minus.png");
+        this.load.image("to_hans", "assets/images/tohans.png");
         this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
+
+
     }
     //create() functions are automatically executed when the scene is called
     create(){
@@ -88,21 +91,24 @@ class introPage extends Phaser.Scene{
             onComplete: function(){
                 console.log("tween complete");
                 this.addText();
-                this.addRestart();
-
+                this.addToHansButton();
 
             }
         });
     }
 
     addText(){
-        this.add.text(0,0, introPageText, {fontFamily: 'Georgia'});
+        var welcomeText = this.add.text(10,0, introPageText, {fontFamily: 'GermaniaOne-Regular'});
+        welcomeText.setStyle({
+            color: 'white',
+            wordWrap: {width: 150}
+        });
     }
 
-    addRestart(){
-        var restartButton = this.add.image(400, 350, "restart");
-        restartButton.setInteractive();
-        restartButton.on("pointerdown", function(){
+    addToHansButton(){
+        var toHansButton = this.add.image(500, 400, "to_hans");
+        toHansButton.setInteractive();
+        toHansButton.on("pointerdown", function(){
            console.log("click");
            this.scene.start("InputPage");
         }, this);
