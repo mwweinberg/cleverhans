@@ -56,7 +56,7 @@ class bootGame extends Phaser.Scene{
         this.load.image("to_hans", "assets/images/tohans.png");
         this.load.image("add_hans", "assets/images/addhans.png");
         this.load.image("sub_hans", "assets/images/subhans.png");
-        this.load.image("weider_hans", "assets/images/weiderhans.png");
+        this.load.image("again_hans", "assets/images/againhans.png");
         this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
 
 
@@ -274,7 +274,7 @@ class mathPage extends Phaser.Scene {
     }
 
     addResetButton(){
-        var resetButton = this.add.image(650, 375, "weider_hans");
+        var resetButton = this.add.image(500, 400, "again_hans");
         resetButton.setInteractive();
         resetButton.on("pointerdown", function(){
             this.scene.start("InputPage");
