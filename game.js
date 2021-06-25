@@ -54,6 +54,9 @@ class bootGame extends Phaser.Scene{
         this.load.image("plus_image", "assets/images/plus.png");
         this.load.image("minus_image", "assets/images/minus.png");
         this.load.image("to_hans", "assets/images/tohans.png");
+        this.load.image("add_hans", "assets/images/addhans.png");
+        this.load.image("sub_hans", "assets/images/subhans.png");
+        this.load.image("weider_hans", "assets/images/weiderhans.png");
         this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
 
 
@@ -162,6 +165,7 @@ class inputPage extends Phaser.Scene {
         this.addPlusCalc2();
         this.addMinusCalc2();
         this.addAddButton();
+        this.addMinusButton();
 
     }
 
@@ -220,10 +224,19 @@ class inputPage extends Phaser.Scene {
     }
 
     addAddButton(){
-        var addButton = this.add.image(275, 250, "restart");
+        var addButton = this.add.image(400, 150, "add_hans");
         addButton.setInteractive();
         addButton.on("pointerdown", function(){
             calcOut = calc1 + calc2;
+            this.scene.start("MathPage");
+        }, this);
+    }
+
+    addMinusButton(){
+        var subButton = this.add.image(400, 350, "sub_hans");
+        subButton.setInteractive();
+        subButton.on("pointerdown", function(){
+            calcOut = calc1 - calc2;
             this.scene.start("MathPage");
         }, this);
     }
@@ -261,7 +274,7 @@ class mathPage extends Phaser.Scene {
     }
 
     addResetButton(){
-        var resetButton = this.add.image(100, 400, "restart");
+        var resetButton = this.add.image(650, 375, "weider_hans");
         resetButton.setInteractive();
         resetButton.on("pointerdown", function(){
             this.scene.start("InputPage");
