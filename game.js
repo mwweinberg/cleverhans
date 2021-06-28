@@ -1,4 +1,4 @@
-var introPageText = "Guten Tag! I am Herr Doktor Osten. My clever horse Hans would like to calculate for you!"
+var introPageText = "Guten Tag! I am Herr Doktor von Osten. My clever horse Hans would like to calculate for you!"
 var inputPageText = "Bitte pick your numbers so that Hans can calulate for you!"
 
 var calc1 = 1
@@ -57,6 +57,7 @@ class bootGame extends Phaser.Scene{
         this.load.image("add_hans", "assets/images/addhans.png");
         this.load.image("sub_hans", "assets/images/subhans.png");
         this.load.image("again_hans", "assets/images/againhans.png");
+        this.load.image("hans_crowd", "assets/images/hans_crowd.jpg");
         this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
 
 
@@ -106,6 +107,7 @@ class introPage extends Phaser.Scene{
             color: 'white',
             wordWrap: {width: 150}
         });
+        
     }
 
     addToHansButton(){
@@ -127,6 +129,8 @@ class inputPage extends Phaser.Scene {
     }
     create(){
         console.log("input page loaded");
+        //loads the background image with some opacity
+        this.add.image((gameOptions.canvasWidth/2), (gameOptions.canvasHeight/2), "hans_crowd").setAlpha(.3);
         //adds the face image
         this.add.image(50, 50, "osten_face_right");
         //adds the text at the top by first creating a variable
@@ -134,7 +138,9 @@ class inputPage extends Phaser.Scene {
         //and then setting the style on the variable
         ostenText.setStyle({
             color: 'black',
-            wordWrap: {width: 300}
+            fontSize: 30,
+            fontFamily: 'GermaniaOne-Regular',
+            wordWrap: {width: 400}
         });
 
         //this is another way to create the text
@@ -149,14 +155,18 @@ class inputPage extends Phaser.Scene {
         // });
 
         //variable to hold the text elements of dislpaying calc1
-        calc1Text = this.add.text(150, 250, calc1);
+        calc1Text = this.add.text((gameOptions.canvasWidth * .25), 220, calc1);
         calc1Text.setStyle({
-            color: 'black'
+            color: 'black',
+            fontFamily: 'GermaniaOne-Regular',
+            fontSize: 80
         });
         //and calc2
-        calc2Text = this.add.text(400, 250, calc2);
+        calc2Text = this.add.text((gameOptions.canvasWidth * .75), 220, calc2);
         calc2Text.setStyle({
-            color: 'black'
+            color: 'black',
+            fontFamily: 'GermaniaOne-Regular',
+            fontSize: 80
         });
 
         //add the buttons
@@ -169,16 +179,14 @@ class inputPage extends Phaser.Scene {
 
     }
 
-    //TODO: create minusPlusCalc1, addPlusCalc2, and minusPlusCacl2 functions
-    //      create calc2Text variable
-    //      add calc2Text
-    //      create buttons to add the numbers together/advance the scene
 
     //adds the plus icon
     //increments the value of calc1 by adding 1
     addPlusCalc1(){
         //variable for the plus icon
-        var plusCalc1 = this.add.image(65, 200, "plus_image");
+        var plusCalc1 = this.add.image((gameOptions.canvasWidth * .1), 225, "plus_image");
+        //rescales the button size 50%
+        plusCalc1.setScale(.5);
         //makes the plus icon interactive
         plusCalc1.setInteractive();
         //when the plus icon is pressed
@@ -197,7 +205,8 @@ class inputPage extends Phaser.Scene {
     }
 
     addMinusCalc1(){
-        var minusCalc1 = this.add.image(65, 350, "minus_image");
+        var minusCalc1 = this.add.image((gameOptions.canvasWidth * .1), 325, "minus_image");
+        minusCalc1.setScale(.5);
         minusCalc1.setInteractive();
         minusCalc1.on("pointerdown", function(){
             calc1 = calc1 - 1;
@@ -206,7 +215,8 @@ class inputPage extends Phaser.Scene {
     }
 
     addPlusCalc2(){
-        var plusCalc2 = this.add.image(450, 200, "plus_image");
+        var plusCalc2 = this.add.image((gameOptions.canvasWidth * .9), 225, "plus_image");
+        plusCalc2.setScale(.5);
         plusCalc2.setInteractive();
         plusCalc2.on("pointerdown", function(){
             calc2 = calc2 + 1;
@@ -215,7 +225,8 @@ class inputPage extends Phaser.Scene {
     }
 
     addMinusCalc2(){
-        var minusCalc2 = this.add.image(450, 350, "minus_image");
+        var minusCalc2 = this.add.image((gameOptions.canvasWidth * .9), 325, "minus_image");
+        minusCalc2.setScale(.5);
         minusCalc2.setInteractive();
         minusCalc2.on("pointerdown", function(){
             calc2 = calc2 - 1;
@@ -224,7 +235,8 @@ class inputPage extends Phaser.Scene {
     }
 
     addAddButton(){
-        var addButton = this.add.image(275, 150, "add_hans");
+        var addButton = this.add.image(gameOptions.canvasWidth/2, 200, "add_hans");
+        addButton.setScale(.5);
         addButton.setInteractive();
         addButton.on("pointerdown", function(){
             calcOut = calc1 + calc2;
@@ -233,7 +245,8 @@ class inputPage extends Phaser.Scene {
     }
 
     addMinusButton(){
-        var subButton = this.add.image(275, 350, "sub_hans");
+        var subButton = this.add.image(gameOptions.canvasWidth/2, 300, "sub_hans");
+        subButton.setScale(.5);
         subButton.setInteractive();
         subButton.on("pointerdown", function(){
             calcOut = calc1 - calc2;
