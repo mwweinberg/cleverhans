@@ -59,6 +59,7 @@ class bootGame extends Phaser.Scene{
         this.load.image("again_hans", "assets/images/againhans.png");
         this.load.image("hans_crowd", "assets/images/hans_crowd.jpg");
         this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
+        this.load.spritesheet('horse_idle', "assets/images/Horse_Idle.png", {frameWidth: 60, frameHeight: 33});
 
 
     }
@@ -107,7 +108,7 @@ class introPage extends Phaser.Scene{
             color: 'white',
             wordWrap: {width: 150}
         });
-        
+
     }
 
     addToHansButton(){
@@ -281,6 +282,12 @@ class mathPage extends Phaser.Scene {
             //repeat: calcOut
         });
 
+        this.anims.create({
+            key: 'horse',
+            frames: this.anims.generateFrameNumbers('horse_idle', { frames: [0, 1, 2, 3, 4, 12]}),
+            framerate: 6,
+        });
+
         //inserts the animation object
         const cody = this.add.sprite(400, 300);
         //scales the animation object
@@ -288,6 +295,11 @@ class mathPage extends Phaser.Scene {
         //plays the animation object calcOut number of times
         //does repeat always do one extra? That's what the -1 is there to balance
         cody.play({key: 'walk', repeat: (calcOut - 1)});
+
+        //adds the horse animation object
+        const horse_image = this.add.sprite(100, 100);
+        horse_image.setScale(2);
+        horse_image.play({key: 'horse', repeat: (calcOut - 1)});
 
         //adds the reset button
         this.addResetButton();
