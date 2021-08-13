@@ -58,7 +58,7 @@ class bootGame extends Phaser.Scene{
         this.load.image("sub_hans", "assets/images/subhans.png");
         this.load.image("again_hans", "assets/images/againhans.png");
         this.load.image("hans_crowd", "assets/images/hans_crowd.jpg");
-        this.load.spritesheet('brawler', "assets/images/brawler48x48.png", {frameWidth: 40, frameHeight: 48});
+        this.load.image("hans_teach", "assets/images/hans-teach.jpg");
         this.load.spritesheet('horse_idle', "assets/images/Horse_Idle.png", {frameWidth: 60, frameHeight: 33});
 
 
@@ -71,6 +71,7 @@ class bootGame extends Phaser.Scene{
     }
 }
 
+//first page
 class introPage extends Phaser.Scene{
     constructor(){
         super("IntroPage");
@@ -106,7 +107,8 @@ class introPage extends Phaser.Scene{
         var welcomeText = this.add.text(10,0, introPageText, {fontFamily: 'GermaniaOne-Regular'});
         welcomeText.setStyle({
             color: 'white',
-            wordWrap: {width: 150}
+            fontSize: 20,
+            wordWrap: {width: 250}
         });
 
     }
@@ -124,6 +126,7 @@ class introPage extends Phaser.Scene{
 
 }
 
+//second page
 class inputPage extends Phaser.Scene {
     constructor(){
         super("InputPage");
@@ -263,43 +266,36 @@ class mathPage extends Phaser.Scene {
 
     create(){
 
+        //loads the background image with some opacity
+        this.add.image((gameOptions.canvasWidth/2), (gameOptions.canvasHeight/2), "hans_teach").setAlpha(.3);
+
         //hans cannot express negative numbers
         //may need to be 1 so that the math below does not create -1
         if (calcOut < 0) {
             calcOut = 1
         }
 
-        var calcOutValue = this.add.text(200, 200, calcOut);
-        calcOutValue.setStyle({
-            color: 'black'
-        });
-
-        //creates the animation object
-        this.anims.create({
-            key: 'walk',
-            frames: this.anims.generateFrameNumbers('brawler', { frames: [ 0, 1, 2, 3 ] }),
-            frameRate: 8,
-            //repeat: calcOut
-        });
+        //troubleshooting code to print calcOut, can be deleted
+        // var calcOutValue = this.add.text(200, 200, calcOut);
+        // calcOutValue.setStyle({
+        //     color: 'black'
+        // });
 
         this.anims.create({
             key: 'horse',
+            //you only want to use some of the frames from the spritesheet
             frames: this.anims.generateFrameNumbers('horse_idle', { frames: [0, 1, 2, 3, 4, 12]}),
             framerate: 6,
         });
 
-        //inserts the animation object
-        const cody = this.add.sprite(400, 300);
+        //adds the horse animation object
+        const horse_image = this.add.sprite(gameOptions.canvasWidth/2, gameOptions.canvasHeight/2);
         //scales the animation object
-        cody.setScale(2);
+        horse_image.setScale(6);
         //plays the animation object calcOut number of times
         //does repeat always do one extra? That's what the -1 is there to balance
-        cody.play({key: 'walk', repeat: (calcOut - 1)});
-
-        //adds the horse animation object
-        const horse_image = this.add.sprite(100, 100);
-        horse_image.setScale(2);
-        horse_image.play({key: 'horse', repeat: (calcOut - 1)});
+        //frameRate controls the animation speed
+        horse_image.play({key: 'horse', frameRate: 4, repeat: (calcOut - 1)});
 
         //adds the reset button
         this.addResetButton();
